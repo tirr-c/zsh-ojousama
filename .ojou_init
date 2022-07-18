@@ -25,10 +25,6 @@ if [[ $0 != template-script || -n $ZSH_SCRIPT ]]; then
     # In case of the script using other scripts from the plugin, either set up
     # $fpath and autoload, or add the directory to $PATH.
     fpath+=( $Plugins[ZSH_OJOUSAMA_DIR] )
-    autoload …
-
-    # OR
-    path+=( $Plugins[ZSH_OJOUSAMA_DIR] )
 fi
 
 # The script/function contents possibly using $Plugins[ZSH_OJOUSAMA_DIR] …
@@ -51,6 +47,7 @@ function .ojou_accept-line() {
 
 function zsh-ojousama_plugin_unload() {
     zle -A .ojou_orig_accept-line accept-line
+    zle -D .ojou_orig_accept-line
 }
 
 zsh-ojousama_plugin_unload 2>/dev/null

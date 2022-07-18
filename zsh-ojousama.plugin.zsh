@@ -18,7 +18,7 @@ if [[ ${zsh_loaded_plugins[-1]} != */zsh-ojousama && -z ${fpath[(r)${0:h}]} ]] {
 typeset -gA Plugins
 Plugins[ZSH_OJOUSAMA_DIR]="${0:h}"
 
-autoload -Uz ojou-init && ojou-init
+autoload -Uz .ojou_init && .ojou_init
 
 # Use alternate vim marks [[[ and ]]] as the original ones can
 # confuse nested substitutions, e.g.: ${${${VAR}}}
