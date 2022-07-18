@@ -18,7 +18,30 @@ if [[ ${zsh_loaded_plugins[-1]} != */zsh-ojousama && -z ${fpath[(r)${0:h}]} ]] {
 typeset -gA Plugins
 Plugins[ZSH_OJOUSAMA_DIR]="${0:h}"
 
-autoload -Uz .ojou_init && .ojou_init
+function .ojou_accept-line() {
+    local stripped_buffer=${BUFFER%%[[:blank:]]##}
+    if [[ -n $stripped_buffer ]]; then
+        if [[ $LANG == *.UTF-8 ]]; then
+            PREDISPLAY='お'
+            POSTDISPLAY='ですわ〜'
+        else
+            PREDISPLAY='o'
+            POSTDISPLAY=' desuwa~'
+        fi
+    fi
+
+    zle .ojou_orig_accept-line
+}
+
+function zsh-ojousama_plugin_unload() {
+    zle -A .ojou_orig_accept-line accept-line
+    zle -D .ojou_orig_accept-line
+}
+
+zsh-ojousama_plugin_unload 2>/dev/null
+
+zle -A accept-line .ojou_orig_accept-line
+zle -N accept-line .ojou_accept-line
 
 # Use alternate vim marks [[[ and ]]] as the original ones can
 # confuse nested substitutions, e.g.: ${${${VAR}}}
