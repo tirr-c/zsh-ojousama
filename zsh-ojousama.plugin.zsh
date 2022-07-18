@@ -25,7 +25,7 @@ function .ojou_accept-line() {
             PREDISPLAY='お'
             POSTDISPLAY='ですわ〜'
         else
-            PREDISPLAY='o'
+            PREDISPLAY='o-'
             POSTDISPLAY=' desuwa~'
         fi
     fi
